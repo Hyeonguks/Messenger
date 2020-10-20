@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "718479358320",
+    "firebase_url": "https://messenger-d4af5.firebaseio.com",
+    "project_id": "messenger-d4af5",
+    "storage_bucket": "messenger-d4af5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718479358320:android:ea31f677aabf74e931b7b5",
+        "android_client_info": {
+          "package_name": "woogie.space.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718479358320-1td37ndtaa9cu88gabbkcaf5glqgj6sl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "woogie.space.messenger",
+            "certificate_hash": "065bdfcb39f8e7247eaa77d8f77093b42c56bbb3"
+          }
+        },
+        {
+          "client_id": "718479358320-cr336rbhvtrbhoo97ik0pbcduleudmpb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT9aIbWXbCDaywVsXXdfa6HdJ1_3iSaVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718479358320-cr336rbhvtrbhoo97ik0pbcduleudmpb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
