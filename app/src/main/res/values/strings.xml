@@ -1,3 +1,56 @@
 <resources>
     <string name="app_name">Messenger</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- 메인 탭 메뉴에서 사용할 문자열 -->
+    <string name="Action_Settings">설정</string>
+    <string name="Action_Add_User">친구추가</string>
+    <string name="Action_Logout">로그아웃</string>
+    <string name="Action_Search">검색</string>
+    <string name="Action_friends_setting">친구관리</string>
+
+    <string name="oops_thre_is_no_friends">이런! 아직 친구가 없어요.</string>
+    <string name="oops_thre_is_no_chatroom">이런! 아직 대화방이 없어요.</string>
+
+    <string name="OAuth2.0">86580464745-bjertfd8uqgoi0f3bu2hvqnrqd6cmnf1.apps.googleusercontent.com</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- 디폴트 프래그먼트에서 사용할 문자열 -->
+    <string name="Default_Fragment_EditText">로그인 또는 회원가입</string>
+    <string name="Default_Fragment_Button">계속</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_main_tab">MainTabActivity</string>
+    <string name="title_activity_chatting">ChattingActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <!-- chat activity-->
+    <string name="chat_edittext">내용을 입력해주세요…</string>
 </resources>
