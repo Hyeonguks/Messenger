@@ -15,16 +15,16 @@
         android:theme="@style/Theme.Messenger">
         <activity android:name=".chat.ChatActivity"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.Design.NoActionBar" >
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" >
         </activity>
         <activity
             android:name=".sign.SignActivity"
-            android:theme="@style/Theme.Design.NoActionBar"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity android:name=".MainActivity"
-            android:theme="@style/Theme.Design.NoActionBar">
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
