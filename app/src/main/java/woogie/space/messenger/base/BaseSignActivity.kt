@@ -11,9 +11,11 @@ abstract class BaseSignActivity<B : ViewDataBinding,V : ViewModel>(private val l
 
     protected lateinit var binding: B
     abstract val viewModel: V
+    abstract fun bindInit()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
+        bindInit()
     }
 }
