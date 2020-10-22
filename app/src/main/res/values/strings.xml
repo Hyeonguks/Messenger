@@ -13,12 +13,14 @@
     <string name="oops_thre_is_no_friends">이런! 아직 친구가 없어요.</string>
     <string name="oops_thre_is_no_chatroom">이런! 아직 대화방이 없어요.</string>
 
-    <string name="OAuth2.0">86580464745-bjertfd8uqgoi0f3bu2hvqnrqd6cmnf1.apps.googleusercontent.com</string>
+    <string name="OAuth2.0">718479358320-cr336rbhvtrbhoo97ik0pbcduleudmpb.apps.googleusercontent.com</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- 디폴트 프래그먼트에서 사용할 문자열 -->
     <string name="Default_Fragment_EditText">로그인 또는 회원가입</string>
     <string name="Default_Fragment_Button">계속</string>
+    <string name="GoogleButton">구글로 계속</string>
+    <string name="NiceToMeetYou">반가워요!</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

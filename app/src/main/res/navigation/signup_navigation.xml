@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/navigation_signup_login_navigator"
-        android:name="woogie.space.messenger.sign.EnterEmailFragment"
-        tools:layout="@layout/fragment_enter_email" >
+        android:name="woogie.space.messenger.sign.StartFragment"
+        tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_from_default_to_pw"
             app:destination="@id/navigation_pw"
