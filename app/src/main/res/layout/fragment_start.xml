@@ -38,7 +38,7 @@
 
 
         <Button
-            android:drawableStart="@drawable/googleg_standard_color_18"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:textStyle="bold"
             android:id="@+id/Btn_Next"
             android:layout_width="0dp"
@@ -48,6 +48,7 @@
             android:layout_marginBottom="12dp"
             android:text="@string/GoogleButton"
             android:textSize="14sp"
+            app:icon="@drawable/googleg_disabled_color_18"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

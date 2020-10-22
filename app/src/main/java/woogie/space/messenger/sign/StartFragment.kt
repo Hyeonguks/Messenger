@@ -11,20 +11,28 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_start.view.*
+import org.json.JSONObject
 import woogie.space.messenger.MainActivity
 import woogie.space.messenger.R
 import woogie.space.messenger.base.BaseSignFragment
 import woogie.space.messenger.databinding.FragmentStartBinding
 
-class StartFragment: BaseSignFragment<FragmentStartBinding, SignViewModel>(R.layout.fragment_start), View.OnClickListener {
+class StartFragment :
+    BaseSignFragment<FragmentStartBinding, SignViewModel>(R.layout.fragment_start),
+    View.OnClickListener {
     override val viewModel: SignViewModel by activityViewModels()
 
-    val mAuth : FirebaseAuth = FirebaseAuth.getInstance()
-    lateinit var mGoogleSignInClient : GoogleSignInClient
+    val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+
+    val database = Firebase.database
+    val userRef = database.getReference("users/")
 
 //    이미 로그인한 사용자일 경우
-//    GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//    GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this)
 //    updateUI(account);
 
     override fun Init() {
@@ -50,7 +58,7 @@ class StartFragment: BaseSignFragment<FragmentStartBinding, SignViewModel>(R.lay
         }
     }
 
-    override fun InitToolbar() { }
+    override fun InitToolbar() {}
 
     override fun KeyboardActionDone() {}
 
@@ -94,8 +102,24 @@ class StartFragment: BaseSignFragment<FragmentStartBinding, SignViewModel>(R.lay
                     // Sign in success, update UI with the signed-in user's information
                     Log.e("StartFragment", "signInWithCredential:success")
                     val user = mAuth.currentUser
-                    startActivity(Intent(requireActivity(),MainActivity::class.java))
-                    requireActivity().finish()
+                    val map: HashMap<String, String> = HashMap()
+                    map["uid"] = user?.uid.toString()
+                    map["photoUrl"] = user?.photoUrl.toString()
+                    map["displayName"] = user?.displayName.toString()
+                    map["email"] = user?.email.toString()
+                    database.getReference("users").child(user?.uid.toString()).setValue(map)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                startActivity(Intent(requireActivity(), MainActivity::class.java))
+                                requireActivity().finish()
+                            } else {
+                                Snackbar.make(
+                                    bind.root,
+                                    "Authentication Failed.",
+                                    Snackbar.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.e("StartFragment", "signInWithCredential:failure", task.exception)

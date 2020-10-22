@@ -9,6 +9,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Con"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
