@@ -6,6 +6,7 @@
     <!-- 메인 탭 메뉴에서 사용할 문자열 -->
     <string name="Action_Settings">설정</string>
     <string name="Action_Add_User">친구추가</string>
+    <string name="Action_Chat">대화시작</string>
     <string name="Action_Logout">로그아웃</string>
     <string name="Action_Search">검색</string>
     <string name="Action_friends_setting">친구관리</string>
@@ -16,11 +17,21 @@
     <string name="OAuth2.0">718479358320-cr336rbhvtrbhoo97ik0pbcduleudmpb.apps.googleusercontent.com</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- 디폴트 프래그먼트에서 사용할 문자열 -->
+    <!-- 회원가입 디폴트 프래그먼트에서 사용할 문자열 -->
     <string name="Default_Fragment_EditText">로그인 또는 회원가입</string>
     <string name="Default_Fragment_Button">계속</string>
     <string name="GoogleButton">구글로 계속</string>
     <string name="NiceToMeetYou">반가워요!</string>
+
+    <!-- 메인 프래그먼트에서 사용할 문자열 -->
+    <string name="NoFriends">이런! 아직 친구가 없어요.</string>
+    <string name="NoRooms">이런! 아직 대화방이 없어요.</string>
+
+
+    <!-- 메인 리사이클러뷰 사용할 문자열 -->
+    <string name="UserName">불러오는 중..</string>
+
+
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

@@ -8,10 +8,6 @@ import woogie.space.messenger.camera.CameraFragment
 import woogie.space.messenger.friends.FriendsFragment
 import woogie.space.messenger.rooms.ChattingRoomsFragment
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 class MainPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
@@ -19,13 +15,13 @@ class MainPagerAdapter(private val context: Context, fm: FragmentManager) :
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         return when(position) {
-            1 -> {
+            0 -> {
                 CameraFragment.newInstance("","")
             }
-            2 -> {
+            1 -> {
                 FriendsFragment.newInstance("","")
             }
-            3 -> {
+            2 -> {
                 ChattingRoomsFragment.newInstance("","")
             }
             else -> {

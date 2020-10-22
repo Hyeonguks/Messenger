@@ -1,31 +1,55 @@
 package woogie.space.messenger.friends
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import woogie.space.messenger.MainViewModel
 import woogie.space.messenger.R
 import woogie.space.messenger.base.BaseMainFragment
 import woogie.space.messenger.databinding.FragmentFriendsBinding
+import woogie.space.messenger.model.Friends
+import woogie.space.messenger.sign.SignActivity
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class FriendsFragment : BaseMainFragment<FragmentFriendsBinding,MainViewModel>() {
+class FriendsFragment : BaseMainFragment<FragmentFriendsBinding,MainViewModel>(), View.OnClickListener{
     private var param1: String? = null
     private var param2: String? = null
-
     override val viewModel: MainViewModel by activityViewModels()
+
+    private lateinit var friendsAdapter: FriendsAdapter
+    lateinit var lManager : LinearLayoutManager
+    var friendsList = arrayListOf<Friends>()
 
     override fun BindInit() {
         bind.apply {
             friends = viewModel
             lifecycleOwner = requireActivity()
             executePendingBindings()
+
+            friendsAdapter = FriendsAdapter(requireActivity(), fakeList())
+            lManager = LinearLayoutManager(requireActivity())
+//            FriendsRecyclerView.setWillNotDraw(false)
+            lManager.orientation = LinearLayoutManager.VERTICAL
+            FriendsRecyclerView.layoutManager = lManager
+            FriendsRecyclerView.adapter = friendsAdapter
+
+            ConLoading.visibility = View.GONE
+            ConNothing.visibility = View.GONE
         }
+    }
+
+    fun fakeList() : ArrayList<Friends>{
+        for (i in 1..100) {
+            friendsList.add(Friends(1,"김형욱$i"))
+        }
+        return friendsList
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,5 +79,14 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding,MainViewModel>()
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.Btn_Add_Friends -> {
+                startActivity(Intent(requireActivity(),SignActivity::class.java))
+            }
+
+        }
     }
 }
