@@ -3,6 +3,7 @@ package woogie.space.messenger.sign
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -63,6 +64,12 @@ class StartFragment :
     override fun KeyboardActionDone() {}
 
     override fun Next() {
+        // 로딩 시작!
+        requireActivity().window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        bind.LoadingBar.visibility = View.VISIBLE
+
         val signInIntent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, 1)
     }
@@ -90,6 +97,8 @@ class StartFragment :
                 // Google Sign In failed, update UI appropriately
                 Log.e("StartFragment", "Google sign in failed", e)
                 // ...
+                requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                bind.LoadingBar.visibility = View.GONE
             }
         }
     }
@@ -113,6 +122,8 @@ class StartFragment :
                                 startActivity(Intent(requireActivity(), MainActivity::class.java))
                                 requireActivity().finish()
                             } else {
+                                requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                                bind.LoadingBar.visibility = View.GONE
                                 Snackbar.make(
                                     bind.root,
                                     "Authentication Failed.",
@@ -121,6 +132,8 @@ class StartFragment :
                             }
                         }
                 } else {
+                    requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                    bind.LoadingBar.visibility = View.GONE
                     // If sign in fails, display a message to the user.
                     Log.e("StartFragment", "signInWithCredential:failure", task.exception)
                     Snackbar.make(bind.root, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
