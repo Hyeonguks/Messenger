@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import woogie.space.messenger.camera.CameraFragment
 import woogie.space.messenger.friends.FriendsFragment
 import woogie.space.messenger.rooms.ChattingRoomsFragment
+import woogie.space.messenger.settings.SettingsFragment
 
 class MainPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
@@ -25,7 +26,7 @@ class MainPagerAdapter(private val context: Context, fm: FragmentManager) :
                 ChattingRoomsFragment.newInstance("","")
             }
             else -> {
-                ChattingRoomsFragment.newInstance("","")
+                SettingsFragment.newInstance("","")
             }
         }
     }
