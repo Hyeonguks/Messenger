@@ -39,8 +39,10 @@
     <string name="NoHistory">사용자를 검색해보세요!</string>
     <string name="NoResult">검색 결과가 없습니다.</string>
 
-
-
     <!-- chat activity-->
     <string name="chat_edittext">내용을 입력해주세요…</string>
+
+
+    <!-- Firebase Strings-->
+    <string name="users">users</string>
 </resources>

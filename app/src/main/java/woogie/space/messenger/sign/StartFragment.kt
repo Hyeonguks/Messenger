@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_start.view.*
 import woogie.space.messenger.main.MainActivity
@@ -27,10 +28,8 @@ class StartFragment :
     override val viewModel: SignViewModel by activityViewModels()
 
     val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    val db = FirebaseFirestore.getInstance()
     lateinit var mGoogleSignInClient: GoogleSignInClient
-
-    val database = Firebase.database
-    val userRef = database.getReference("users/")
 
 //    이미 로그인한 사용자일 경우
 //    GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this)
@@ -111,25 +110,28 @@ class StartFragment :
                     // Sign in success, update UI with the signed-in user's information
                     Log.e("StartFragment", "signInWithCredential:success")
                     val user = mAuth.currentUser
-                    val map: HashMap<String, String> = HashMap()
-                    map["uid"] = user?.uid.toString()
-                    map["photoUrl"] = user?.photoUrl.toString()
-                    map["displayName"] = user?.displayName.toString()
-                    map["email"] = user?.email.toString()
-                    database.getReference("users").child(user?.uid.toString()).setValue(map)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                startActivity(Intent(requireActivity(), MainActivity::class.java))
-                                requireActivity().finish()
-                            } else {
-                                requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
+                    val userMap = hashMapOf(
+                        "uid" to user?.uid.toString(),
+                        "photoUrl" to user?.photoUrl.toString(),
+                        "displayName" to user?.displayName.toString(),
+                        "email" to user?.email.toString(),
+                    )
+
+                    db.collection(resources.getString(R.string.users))
+                        .document(user?.email.toString())
+                        .set(userMap)
+                        .addOnSuccessListener {
+                            startActivity(Intent(requireActivity(), MainActivity::class.java))
+                            requireActivity().finish()
+                        }
+                        .addOnFailureListener {
+                            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                                 bind.LoadingBar.visibility = View.GONE
                                 Snackbar.make(
                                     bind.root,
                                     "Authentication Failed.",
-                                    Snackbar.LENGTH_SHORT
-                                ).show()
-                            }
+                                    Snackbar.LENGTH_SHORT).show()
                         }
                 } else {
                     requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
