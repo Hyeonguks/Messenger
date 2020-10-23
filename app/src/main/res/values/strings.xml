@@ -37,6 +37,7 @@
 
     <!-- 유저검색 액티비티 -->
     <string name="NoHistory">사용자를 검색해보세요!</string>
+    <string name="NoResult">검색 결과가 없습니다.</string>
 
 
 

@@ -3,6 +3,7 @@ package woogie.space.messenger.search
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import woogie.space.messenger.R
@@ -45,6 +46,26 @@ class SearchUserActivity : BaseSearchUserActivity<ActivitySearchUserBinding,Sear
 
         val searchItem = menu?.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as SearchView
+        searchView.queryHint = "사용자 이메일 검색.."
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText!!.isEmpty()) {
+                    binding.ConNothing.visibility = View.VISIBLE
+                } else {
+                    binding.ConNothing.visibility = View.GONE
+                    binding.ConResult.visibility = View.GONE
+                    binding.SearchHistoryRecyclerView.visibility = View.GONE
+                    binding.ConResultNothing.visibility = View.GONE
+                }
+                return true
+            }
+
+        })
 
         // Assign the listener to that action item
         searchItem.setOnActionExpandListener(expandListener)

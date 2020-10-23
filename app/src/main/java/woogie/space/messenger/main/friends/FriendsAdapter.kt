@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.friends_default.view.*
+import kotlinx.android.synthetic.main.friends_default_item.view.*
 import woogie.space.messenger.R
 import woogie.space.messenger.model.Friends
 
@@ -43,14 +43,14 @@ class FriendsAdapter (var context: Context, var friendsList : ArrayList<Friends>
             TYPE_DEFAULT -> {
                 TYPE_DEFAULT(
                     LayoutInflater.from(context)
-                        .inflate(R.layout.friends_default, parent, false)
+                        .inflate(R.layout.friends_default_item, parent, false)
                 )
             }
 
             TYPE_LOADING -> {
                 TYPE_LOADING(
                     LayoutInflater.from(context)
-                        .inflate(R.layout.friends_loading, parent, false)
+                        .inflate(R.layout.loading_item, parent, false)
                 )
             }
             else -> throw IllegalArgumentException("Invalid view type")
