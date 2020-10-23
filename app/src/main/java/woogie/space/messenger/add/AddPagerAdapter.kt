@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import woogie.space.messenger.camera.CameraFragment
-import woogie.space.messenger.friends.FriendsFragment
-import woogie.space.messenger.rooms.ChattingRoomsFragment
-import woogie.space.messenger.settings.SettingsFragment
+import woogie.space.messenger.main.friends.FriendsFragment
+import woogie.space.messenger.main.rooms.ChattingRoomsFragment
+import woogie.space.messenger.main.settings.SettingsFragment
 
 class AddPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {

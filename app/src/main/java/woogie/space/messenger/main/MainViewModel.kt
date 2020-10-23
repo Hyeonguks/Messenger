@@ -1,4 +1,4 @@
-package woogie.space.messenger
+package woogie.space.messenger.main
 
 import androidx.lifecycle.ViewModel
 

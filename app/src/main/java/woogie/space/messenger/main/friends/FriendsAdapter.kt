@@ -1,4 +1,4 @@
-package woogie.space.messenger.friends
+package woogie.space.messenger.main.friends
 
 import android.content.Context
 import android.view.LayoutInflater

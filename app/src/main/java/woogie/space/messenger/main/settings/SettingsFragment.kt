@@ -1,4 +1,4 @@
-package woogie.space.messenger.settings
+package woogie.space.messenger.main.settings
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

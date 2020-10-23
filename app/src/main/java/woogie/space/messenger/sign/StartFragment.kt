@@ -15,8 +15,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_start.view.*
-import org.json.JSONObject
-import woogie.space.messenger.MainActivity
+import woogie.space.messenger.main.MainActivity
 import woogie.space.messenger.R
 import woogie.space.messenger.base.BaseSignFragment
 import woogie.space.messenger.databinding.FragmentStartBinding

@@ -1,22 +1,21 @@
-package woogie.space.messenger
+package woogie.space.messenger.main
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import woogie.space.messenger.R
 import woogie.space.messenger.base.BaseMainActivity
 import woogie.space.messenger.databinding.ActivityMainBinding
 import woogie.space.messenger.sign.SignActivity
 
-class MainActivity : BaseMainActivity<ActivityMainBinding,MainViewModel>(R.layout.activity_main), View.OnClickListener {
+class MainActivity : BaseMainActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main), View.OnClickListener {
     override val viewModel: MainViewModel by viewModels()
 
     val mAuth : FirebaseAuth = FirebaseAuth.getInstance()

@@ -13,18 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Messenger">
-        <activity
-            android:name=".add.AddActivity"
+        <activity android:name=".search.SearchUserActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
-
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".main.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="woogie.space.messenger.main.MainActivity" />
         </activity>
 
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="false">
-
             <!--
      Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more.
@@ -50,7 +51,7 @@
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

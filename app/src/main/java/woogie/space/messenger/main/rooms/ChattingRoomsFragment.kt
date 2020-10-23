@@ -1,4 +1,4 @@
-package woogie.space.messenger.rooms
+package woogie.space.messenger.main.rooms
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import woogie.space.messenger.MainViewModel
+import woogie.space.messenger.main.MainViewModel
 import woogie.space.messenger.R
 import woogie.space.messenger.base.BaseMainFragment
 import woogie.space.messenger.databinding.FragmentChattingRoomsBinding

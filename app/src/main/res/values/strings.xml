@@ -26,10 +26,8 @@
     <string name="Chatting">채팅</string>
     <string name="Settings">설정</string>
 
-
     <!-- 메인 리사이클러뷰 사용할 문자열 -->
     <string name="UserName">불러오는 중..</string>
-
 
     <!-- 바텀네비게이션 -->
     <string name="FriendsTab">친구</string>
@@ -37,38 +35,10 @@
     <string name="SettingTab">설정</string>
 
 
+    <!-- 유저검색 액티비티 -->
+    <string name="NoHistory">사용자를 검색해보세요!</string>
 
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_main_tab">MainTabActivity</string>
-    <string name="title_activity_chatting">ChattingActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
 
     <!-- chat activity-->
     <string name="chat_edittext">내용을 입력해주세요…</string>
