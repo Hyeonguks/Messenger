@@ -1,4 +1,4 @@
-package woogie.space.messenger
+package woogie.space.messenger.add
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import woogie.space.messenger.friends.FriendsFragment
 import woogie.space.messenger.rooms.ChattingRoomsFragment
 import woogie.space.messenger.settings.SettingsFragment
 
-class MainPagerAdapter(private val context: Context, fm: FragmentManager) :
+class AddPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {

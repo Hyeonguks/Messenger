@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_friends">
+
+    <fragment
+        android:id="@+id/navigation_friends"
+        android:name="woogie.space.messenger.friends.FriendsFragment"
+        android:label="@string/FriendsTab"
+        tools:layout="@layout/fragment_friends" />
+
+    <fragment
+        android:id="@+id/navigation_chats"
+        android:name="woogie.space.messenger.rooms.ChattingRoomsFragment"
+        android:label="@string/ChatTab"
+        tools:layout="@layout/fragment_chatting_rooms" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="woogie.space.messenger.settings.SettingsFragment"
+        android:label="@string/SettingTab"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

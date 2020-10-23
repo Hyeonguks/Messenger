@@ -8,8 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import woogie.space.messenger.MainViewModel
 import woogie.space.messenger.R
+import woogie.space.messenger.add.AddActivity
 import woogie.space.messenger.base.BaseMainFragment
 import woogie.space.messenger.databinding.FragmentFriendsBinding
 import woogie.space.messenger.model.Friends
@@ -27,22 +32,29 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding,MainViewModel>()
     lateinit var lManager : LinearLayoutManager
     var friendsList = arrayListOf<Friends>()
 
+    val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    val database = Firebase.database
+
+    val userRef = database.getReference("users/")
+
     override fun BindInit() {
         bind.apply {
             friends = viewModel
             lifecycleOwner = requireActivity()
             executePendingBindings()
 
-            friendsAdapter = FriendsAdapter(requireActivity(), fakeList())
-            lManager = LinearLayoutManager(requireActivity())
-//            FriendsRecyclerView.setWillNotDraw(false)
-            lManager.orientation = LinearLayoutManager.VERTICAL
-            FriendsRecyclerView.layoutManager = lManager
-            FriendsRecyclerView.adapter = friendsAdapter
+            BtnAddFriends.setOnClickListener(this@FriendsFragment)
 
-            ConLoading.visibility = View.GONE
-            ConNothing.visibility = View.GONE
+//            friendsAdapter = FriendsAdapter(requireActivity(), fakeList())
+//            lManager = LinearLayoutManager(requireActivity())
+//            lManager.orientation = LinearLayoutManager.VERTICAL
+//            FriendsRecyclerView.layoutManager = lManager
+//            FriendsRecyclerView.adapter = friendsAdapter
+
+//            ConLoading.visibility = View.GONE
+//            ConNothing.visibility = View.GONE
         }
+
     }
 
     fun fakeList() : ArrayList<Friends>{
@@ -84,7 +96,7 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding,MainViewModel>()
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.Btn_Add_Friends -> {
-                startActivity(Intent(requireActivity(),SignActivity::class.java))
+                startActivity(Intent(requireActivity(),AddActivity::class.java).putExtra("Type",1))
             }
 
         }

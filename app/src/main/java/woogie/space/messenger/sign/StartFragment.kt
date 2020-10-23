@@ -21,6 +21,7 @@ import woogie.space.messenger.R
 import woogie.space.messenger.base.BaseSignFragment
 import woogie.space.messenger.databinding.FragmentStartBinding
 
+//https://qastack.kr/programming/45373007/progressdialog-is-deprecated-what-is-the-alternate-one-to-use
 class StartFragment :
     BaseSignFragment<FragmentStartBinding, SignViewModel>(R.layout.fragment_start),
     View.OnClickListener {

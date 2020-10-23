@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Messenger</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 메인 탭 메뉴에서 사용할 문자열 -->
@@ -11,9 +10,6 @@
     <string name="Action_Search">검색</string>
     <string name="Action_friends_setting">친구관리</string>
 
-    <string name="oops_thre_is_no_friends">이런! 아직 친구가 없어요.</string>
-    <string name="oops_thre_is_no_chatroom">이런! 아직 대화방이 없어요.</string>
-
     <string name="OAuth2.0">718479358320-cr336rbhvtrbhoo97ik0pbcduleudmpb.apps.googleusercontent.com</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
@@ -23,13 +19,24 @@
     <string name="GoogleButton">구글로 계속</string>
     <string name="NiceToMeetYou">반가워요!</string>
 
-    <!-- 메인 프래그먼트에서 사용할 문자열 -->
+    <!-- 메인액티비티 프래그먼트에서 사용할 문자열 -->
     <string name="NoFriends">이런! 아직 친구가 없어요.</string>
     <string name="NoRooms">이런! 아직 대화방이 없어요.</string>
+    <string name="Friends">친구</string>
+    <string name="Chatting">채팅</string>
+    <string name="Settings">설정</string>
 
 
     <!-- 메인 리사이클러뷰 사용할 문자열 -->
     <string name="UserName">불러오는 중..</string>
+
+
+    <!-- 바텀네비게이션 -->
+    <string name="FriendsTab">친구</string>
+    <string name="ChatTab">채팅</string>
+    <string name="SettingTab">설정</string>
+
+
 
 
     <!-- Preference Titles -->
