@@ -26,6 +26,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/user_search_menu" />
 
+        <ProgressBar
+            android:id="@+id/Loading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SearchToolbar" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/Con_Result"
             android:layout_width="match_parent"
@@ -36,8 +45,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SearchToolbar"
-            tools:visibility="visible">
+            app:layout_constraintTop_toBottomOf="@+id/SearchToolbar">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/PhotoWrapper"
@@ -105,8 +113,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SearchToolbar"
-            tools:visibility="gone">
+            app:layout_constraintTop_toBottomOf="@+id/SearchToolbar">
 
             <TextView
                 android:id="@+id/textView4"

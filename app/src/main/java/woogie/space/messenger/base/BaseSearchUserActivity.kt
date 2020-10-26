@@ -6,15 +6,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 
-abstract class BaseSearchUserActivity<B : ViewDataBinding,V : ViewModel>(private val layoutId: Int) : AppCompatActivity() {
+abstract class BaseSearchUserActivity<B : ViewDataBinding,V : ViewModel>(val layoutId: Int) : AppCompatActivity() {
 
     protected lateinit var binding: B
     abstract val viewModel: V
     abstract fun bindInit()
+    abstract fun observeUI()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
         bindInit()
+        observeUI()
     }
 }
