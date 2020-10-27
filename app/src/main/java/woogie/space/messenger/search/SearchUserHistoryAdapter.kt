@@ -1,6 +1,7 @@
 package woogie.space.messenger.search
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +14,11 @@ import woogie.space.messenger.model.SearchUserHistory
 
 class SearchUserHistoryAdapter (var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val DEFAULT_ITEM_DELETE = 201
+    val DEFAULT_ITEM_CLICK = 203
+
     val FIRST_ITEM_DELETE = 101
     val FIRST_ITEM_DELETE_ALL = 102
+    val FIRST_ITEM_CLICK = 103
 
     private var historyList = emptyList<SearchUserHistory>()
 
@@ -31,6 +35,7 @@ class SearchUserHistoryAdapter (var context: Context) : RecyclerView.Adapter<Rec
         fun bind(searchUserHistory: SearchUserHistory, context: Context) {
             itemView.TextViewSearched.text = searchUserHistory.SearchText
             itemView.Btn_Delete.setOnClickListener{ itemClick?.onClick(it,adapterPosition,searchUserHistory,DEFAULT_ITEM_DELETE) }
+            itemView.Con_Container.setOnClickListener{ itemClick?.onClick(it,adapterPosition,searchUserHistory,DEFAULT_ITEM_CLICK) }
         }
     }
 
@@ -40,6 +45,7 @@ class SearchUserHistoryAdapter (var context: Context) : RecyclerView.Adapter<Rec
             itemView.TextViewSearched.text = searchUserHistory.SearchText
             itemView.Btn_Delete_Item.setOnClickListener{ itemClick?.onClick(it,adapterPosition,searchUserHistory,FIRST_ITEM_DELETE) }
             itemView.Btn_Delete_All.setOnClickListener { itemClick?.onClick(it,adapterPosition,searchUserHistory,FIRST_ITEM_DELETE_ALL) }
+            itemView.Container.setOnClickListener{ itemClick?.onClick(it,adapterPosition,searchUserHistory,FIRST_ITEM_CLICK) }
         }
     }
 

@@ -19,8 +19,8 @@ class SearchUserViewModel(application: Application): AndroidViewModel(applicatio
         repository.insertSearchUserHistory(searchText)
     }
 
-    fun deleteSearchedText(searchText :String) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteSearchUserHistory(searchText)
+    fun deleteSearchedText(index :Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteSearchUserHistory(index)
     }
 
     fun deleteAllSearchedText() = viewModelScope.launch(Dispatchers.IO) {

@@ -12,6 +12,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import woogie.space.messenger.main.MainViewModel
 import woogie.space.messenger.R
+import woogie.space.messenger.add.AddUserActivity
 import woogie.space.messenger.base.BaseMainFragment
 import woogie.space.messenger.databinding.FragmentFriendsBinding
 import woogie.space.messenger.model.Friends
@@ -97,7 +98,8 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding, MainViewModel>(
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.Btn_Add_Friends -> {
-                startActivity(Intent(requireActivity(),SearchUserActivity::class.java))
+//                startActivity(Intent(requireActivity(),SearchUserActivity::class.java))
+                startActivity(Intent(requireActivity(), AddUserActivity::class.java))
             }
 
         }
@@ -111,7 +113,7 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding, MainViewModel>(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_user_search -> startActivity(Intent(requireActivity(),SearchUserActivity::class.java))
-            R.id.action_user_add -> startActivity(Intent(requireActivity(),SearchUserActivity::class.java))
+            R.id.action_user_add -> startActivity(Intent(requireActivity(), AddUserActivity::class.java))
             R.id.action_user_setting -> startActivity(Intent(requireActivity(),SearchUserActivity::class.java))
             else -> return true
         }

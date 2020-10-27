@@ -7,7 +7,7 @@ import woogie.space.messenger.model.SearchUserHistory
 @Dao
 interface SearchUserHistoryDao {
 
-    @Query("SELECT * FROM searchUserHistory")
+    @Query("SELECT * FROM searchUserHistory ORDER BY `index` DESC")
     fun getAll(): LiveData<List<SearchUserHistory>>
 
     //해당 데이터를 추가합니다.
@@ -21,6 +21,6 @@ interface SearchUserHistoryDao {
     @Query("DELETE FROM searchUserHistory")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM searchUserHistory WHERE SearchText = :searchedText")
-    suspend fun deleteBySearchText(searchedText: String)
+    @Query("DELETE FROM searchUserHistory WHERE `index` = :index")
+    suspend fun deleteBySearchText(index: Int)
 }

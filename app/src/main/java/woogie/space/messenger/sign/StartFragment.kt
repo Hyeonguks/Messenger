@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_start.view.*
@@ -111,6 +112,9 @@ class StartFragment :
                     Log.e("StartFragment", "signInWithCredential:success")
                     val user = mAuth.currentUser
 
+                    val myRef = db.collection(resources.getString(R.string.users)).document(user?.email.toString())
+                    val myFriendsRef = db.collection(resources.getString(R.string.friends)).document(user?.email.toString())
+
                     val userMap = hashMapOf(
                         "uid" to user?.uid.toString(),
                         "photoUrl" to user?.photoUrl.toString(),
@@ -118,21 +122,25 @@ class StartFragment :
                         "email" to user?.email.toString(),
                     )
 
-                    db.collection(resources.getString(R.string.users))
-                        .document(user?.email.toString())
-                        .set(userMap)
-                        .addOnSuccessListener {
-                            startActivity(Intent(requireActivity(), MainActivity::class.java))
-                            requireActivity().finish()
-                        }
-                        .addOnFailureListener {
-                            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-                                bind.LoadingBar.visibility = View.GONE
-                                Snackbar.make(
-                                    bind.root,
-                                    "Authentication Failed.",
-                                    Snackbar.LENGTH_SHORT).show()
-                        }
+                    val friendsMap = hashMapOf(
+                        "friendsList" to ArrayList<String>(),
+                        "received" to ArrayList<String>(),
+                        "blockList" to ArrayList<String>(),
+                    )
+                    db.runBatch { batch ->
+                        batch.set(myRef, userMap)
+                        batch.set(myFriendsRef, friendsMap)
+                    }.addOnSuccessListener {
+                        startActivity(Intent(requireActivity(), MainActivity::class.java))
+                        requireActivity().finish()
+                    }.addOnFailureListener {
+                        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                        bind.LoadingBar.visibility = View.GONE
+                        Snackbar.make(
+                            bind.root,
+                            "Authentication Failed.",
+                            Snackbar.LENGTH_SHORT).show()
+                    }
                 } else {
                     requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                     bind.LoadingBar.visibility = View.GONE

@@ -12,11 +12,11 @@ import woogie.space.messenger.model.SearchUserHistory
 class SearchUserHistoryRepository(private val searchUserHistoryDao: SearchUserHistoryDao) {
 
     suspend fun insertSearchUserHistory(searchUserHistoryText : String) {
-        searchUserHistoryDao.insert(SearchUserHistory(searchUserHistoryText))
+        searchUserHistoryDao.insert(SearchUserHistory(0,searchUserHistoryText))
     }
 
-    suspend fun deleteSearchUserHistory(searchedText: String) {
-        searchUserHistoryDao.deleteBySearchText(searchedText)
+    suspend fun deleteSearchUserHistory(index: Int) {
+        searchUserHistoryDao.deleteBySearchText(index)
     }
 
     suspend fun deleteAllSearchUserHistory() {

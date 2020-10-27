@@ -13,7 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Messenger">
-        <activity android:name=".userprofile.UserProfileActivity"></activity>
+        <activity android:name=".add.AddUserActivity"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="woogie.space.messenger.main.MainActivity" />
+        </activity>
+        <activity android:name=".userprofile.UserProfileActivity" />
         <activity
             android:name=".search.SearchUserActivity"
             android:parentActivityName=".main.MainActivity"

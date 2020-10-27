@@ -36,11 +36,14 @@
 
 
     <!-- 유저검색 액티비티 -->
-    <string name="NoHistory">사용자를 검색해보세요!</string>
+    <string name="NoHistory">최근 검색기록이 없습니다.</string>
     <string name="NoResult">검색 결과가 없습니다.</string>
-    <string name="UserSearch">사용자 검색</string>
+    <string name="UserSearch">이메일로 추가</string>
     <string name="RecentSearchHistory">최근검색</string>
     <string name="DeleteAll">전체삭제</string>
+    <string name="Email">Email</string>
+    <string name="ok">확인</string>
+
 
     <!-- chat activity-->
     <string name="chat_edittext">내용을 입력해주세요…</string>
@@ -48,4 +51,5 @@
 
     <!-- Firebase Strings-->
     <string name="users">users</string>
+    <string name="friends">friends</string>
 </resources>

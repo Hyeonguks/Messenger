@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import woogie.space.messenger.R
 import woogie.space.messenger.base.BaseSearchUserActivity
@@ -24,15 +25,16 @@ class SearchUserActivity : BaseSearchUserActivity<ActivitySearchUserBinding, Sea
     override val viewModel: SearchUserViewModel by viewModels()
 
     val db = FirebaseFirestore.getInstance()
+    val mAuth : FirebaseAuth = FirebaseAuth.getInstance()
 
     var lastSearchedUserName : String = ""
     var isSearching : Boolean = false
     private lateinit var historyAdapter: SearchUserHistoryAdapter
 
     /*
-    1. 검색결과 저장.
-    2. 전체삭제, 개별삭제
-    3. 최근 검색이 가장 밑에있다 이거 해결해야함.
+    1. 최근 검색이 가장 밑에있다 이거 해결해야함.
+    2. 리사이클러 뷰 스크롤 바 표시.
+    4. 아이템 클릭 시 해당 검색기록으로 검
      */
 
     override fun bindInit() {
@@ -51,11 +53,15 @@ class SearchUserActivity : BaseSearchUserActivity<ActivitySearchUserBinding, Sea
             historyAdapter.itemClick = object : SearchUserHistoryAdapter.ItemClick {
                 override fun onClick(view: View, position: Int, searchUserHistory: SearchUserHistory, requestCode: Int) {
                     if (requestCode == historyAdapter.DEFAULT_ITEM_DELETE) {
-                        viewModel.deleteSearchedText(searchUserHistory.SearchText)
+                        viewModel.deleteSearchedText(searchUserHistory.index)
                     } else if (requestCode == historyAdapter.FIRST_ITEM_DELETE) {
-                        viewModel.deleteSearchedText(searchUserHistory.SearchText)
+                        viewModel.deleteSearchedText(searchUserHistory.index)
                     } else if (requestCode == historyAdapter.FIRST_ITEM_DELETE_ALL) {
                         viewModel.deleteAllSearchedText()
+                    } else if (requestCode == historyAdapter.DEFAULT_ITEM_CLICK) {
+
+                    } else if (requestCode == historyAdapter.FIRST_ITEM_CLICK) {
+
                     } else {
 
                     }
@@ -118,45 +124,14 @@ class SearchUserActivity : BaseSearchUserActivity<ActivitySearchUserBinding, Sea
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (TextUtils.isEmpty(query)) {
                     Toast.makeText(this@SearchUserActivity,"내용을 입력해주세요.",Toast.LENGTH_SHORT).show()
+                } else if (mAuth.currentUser!!.email.equals(query)) {
+                    binding.ConResult.visibility = View.GONE
+                    binding.ConResultNothing.visibility = View.VISIBLE
+                    binding.ConNothing.visibility = View.GONE
+                    binding.SearchHistoryRecyclerView.visibility = View.GONE
+                    binding.Loading.visibility = View.GONE
                 } else {
-                    isSearching = true
-                    viewModel.insertSearchedText(query!!)
-                    db.collection(resources.getString(R.string.users))
-                        .document(query)
-                        .get()
-                        .addOnSuccessListener {
-                            if (it.get("email").toString() == "null") {
-                                Log.e("onQueryTextSubmit",it.get("email").toString())
-                                binding.ConResult.visibility = View.GONE
-                                binding.ConResultNothing.visibility = View.VISIBLE
-                                binding.ConNothing.visibility = View.GONE
-                                binding.SearchHistoryRecyclerView.visibility = View.GONE
-                                binding.Loading.visibility = View.GONE
-                                isSearching = false
-                            } else {
-                                lastSearchedUserName = query
-                                Glide.with(this@SearchUserActivity)
-                                    .load(it.get("photoUrl").toString())
-                                    .centerCrop()
-                                    .transition(DrawableTransitionOptions.withCrossFade())
-                                    .into(binding.UserPhoto)
-                                binding.UserName.text = it.get("displayName").toString()
-                                binding.UserEmail.text = it.get("email").toString()
-
-                                binding.ConResult.visibility = View.VISIBLE
-                                binding.ConResultNothing.visibility = View.GONE
-                                binding.ConNothing.visibility = View.GONE
-                                binding.SearchHistoryRecyclerView.visibility = View.GONE
-                                binding.Loading.visibility = View.GONE
-                                isSearching = false
-                            }
-                        }
-                        .addOnFailureListener {
-                            binding.Loading.visibility = View.GONE
-                            isSearching = false
-                            Log.e("onQueryTextSubmit", it.stackTraceToString())
-                            Toast.makeText(this@SearchUserActivity,it.stackTraceToString(),Toast.LENGTH_SHORT).show()
-                        }
+                    SearchingUser(query!!)
                 }
 
                 return true
@@ -216,5 +191,46 @@ class SearchUserActivity : BaseSearchUserActivity<ActivitySearchUserBinding, Sea
                 startActivity(Intent(this@SearchUserActivity, UserProfileActivity::class.java))
             }
         }
+    }
+
+    fun SearchingUser(email: String){
+        isSearching = true
+        viewModel.insertSearchedText(email)
+        db.collection(resources.getString(R.string.users))
+            .document(email)
+            .get()
+            .addOnSuccessListener {
+                if (it.get("email").toString() == "null") {
+                    Log.e("onQueryTextSubmit",it.get("email").toString())
+                    binding.ConResult.visibility = View.GONE
+                    binding.ConResultNothing.visibility = View.VISIBLE
+                    binding.ConNothing.visibility = View.GONE
+                    binding.SearchHistoryRecyclerView.visibility = View.GONE
+                    binding.Loading.visibility = View.GONE
+                    isSearching = false
+                } else {
+                    lastSearchedUserName = email
+                    Glide.with(this@SearchUserActivity)
+                        .load(it.get("photoUrl").toString())
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(binding.UserPhoto)
+                    binding.UserName.text = it.get("displayName").toString()
+                    binding.UserEmail.text = it.get("email").toString()
+
+                    binding.ConResult.visibility = View.VISIBLE
+                    binding.ConResultNothing.visibility = View.GONE
+                    binding.ConNothing.visibility = View.GONE
+                    binding.SearchHistoryRecyclerView.visibility = View.GONE
+                    binding.Loading.visibility = View.GONE
+                    isSearching = false
+                }
+            }
+            .addOnFailureListener {
+                binding.Loading.visibility = View.GONE
+                isSearching = false
+                Log.e("onQueryTextSubmit", it.stackTraceToString())
+                Toast.makeText(this@SearchUserActivity,it.stackTraceToString(),Toast.LENGTH_SHORT).show()
+            }
     }
 }
