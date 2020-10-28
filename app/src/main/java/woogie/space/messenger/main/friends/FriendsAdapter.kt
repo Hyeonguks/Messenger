@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.android.synthetic.main.friends_default_item.view.*
 import woogie.space.messenger.R
 import woogie.space.messenger.model.Friends
@@ -30,6 +32,12 @@ class FriendsAdapter (var context: Context) : RecyclerView.Adapter<RecyclerView.
         fun bind(friends: Friends, context: Context) {
 //            itemView.UserImage.text = friends.userName
             itemView.UserName.text = friends.name
+
+            Glide.with(context)
+                .load(friends.photo)
+                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(itemView.UserImage)
         }
     }
 
