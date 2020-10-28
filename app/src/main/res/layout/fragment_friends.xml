@@ -25,10 +25,10 @@
             android:id="@+id/Con_Loading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FriendsToolbar"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FriendsToolbar">
 
             <ProgressBar
                 android:id="@+id/progressBar3"
@@ -45,9 +45,11 @@
             android:id="@+id/Con_Nothing"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FriendsToolbar"
-            tools:layout_editor_absoluteX="-16dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FriendsToolbar">
 
             <ImageView
                 android:id="@+id/imageView"

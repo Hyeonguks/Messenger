@@ -2,10 +2,12 @@ package woogie.space.messenger.main.friends
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
@@ -16,6 +18,7 @@ import woogie.space.messenger.add.AddUserActivity
 import woogie.space.messenger.base.BaseMainFragment
 import woogie.space.messenger.databinding.FragmentFriendsBinding
 import woogie.space.messenger.model.Friends
+import woogie.space.messenger.model.SearchUserHistory
 import woogie.space.messenger.search.SearchUserActivity
 
 private const val ARG_PARAM1 = "param1"
@@ -24,11 +27,10 @@ private const val ARG_PARAM2 = "param2"
 class FriendsFragment : BaseMainFragment<FragmentFriendsBinding, MainViewModel>(), View.OnClickListener{
     private var param1: String? = null
     private var param2: String? = null
+
     override val viewModel: MainViewModel by activityViewModels()
 
     private lateinit var friendsAdapter: FriendsAdapter
-    lateinit var lManager : LinearLayoutManager
-    var friendsList = arrayListOf<Friends>()
 
     val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val database = Firebase.database
@@ -47,6 +49,17 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding, MainViewModel>(
 
             BtnAddFriends.setOnClickListener(this@FriendsFragment)
 
+            friendsAdapter = FriendsAdapter(requireActivity())
+            friendsAdapter.itemClick = object : FriendsAdapter.ItemClick {
+                override fun onClick(view: View, position: Int, friend: Friends, requestCode: Int) {
+
+                }
+
+            }
+
+            FriendsRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+            FriendsRecyclerView.adapter = friendsAdapter
+
 //            friendsAdapter = FriendsAdapter(requireActivity(), fakeList())
 //            lManager = LinearLayoutManager(requireActivity())
 //            lManager.orientation = LinearLayoutManager.VERTICAL
@@ -57,13 +70,6 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding, MainViewModel>(
 //            ConNothing.visibility = View.GONE
         }
 
-    }
-
-    fun fakeList() : ArrayList<Friends>{
-        for (i in 1..100) {
-            friendsList.add(Friends(1,"김형욱$i"))
-        }
-        return friendsList
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +87,7 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding, MainViewModel>(
     ): View? {
         bind = DataBindingUtil.inflate(inflater,R.layout.fragment_friends,container,false)
         BindInit()
+        observeUI()
         return bind.root
     }
 
@@ -118,6 +125,23 @@ class FriendsFragment : BaseMainFragment<FragmentFriendsBinding, MainViewModel>(
             else -> return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun observeUI () {
+        viewModel.getFriendsList().observe(requireActivity(), Observer {
+            friendsAdapter.setList(it)
+            if (it.isEmpty()) {
+                Log.e("FriendsFragment","FriendsList is Empty")
+                bind.FriendsRecyclerView.visibility = View.GONE
+                bind.ConNothing.visibility = View.VISIBLE
+                bind.ConLoading.visibility = View.GONE
+            } else {
+                Log.e("FriendsFragment","FriendsList is Not Empty")
+                bind.FriendsRecyclerView.visibility = View.VISIBLE
+                bind.ConNothing.visibility = View.GONE
+                bind.ConLoading.visibility = View.GONE
+            }
+        })
     }
 
 

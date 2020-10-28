@@ -63,14 +63,16 @@ class AddUserActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_ok -> {
-                searchingUser(binding.textInputLayout.editText!!.text.toString())
-            }
-            else -> return true
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_ok -> {
+            searchingUser(binding.textInputLayout.editText!!.text.toString())
+            true
         }
-        return super.onOptionsItemSelected(item)
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
     }
 
     fun searchingUser(email: String) {

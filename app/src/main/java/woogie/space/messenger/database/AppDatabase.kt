@@ -5,8 +5,10 @@ import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import woogie.space.messenger.dao.FriendsDao
 import woogie.space.messenger.dao.LoginDao
 import woogie.space.messenger.dao.SearchUserHistoryDao
+import woogie.space.messenger.model.Friends
 import woogie.space.messenger.model.SearchUserHistory
 
 // https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin#7
@@ -14,12 +16,14 @@ import woogie.space.messenger.model.SearchUserHistory
 @Database(version = 1, exportSchema = false,
         entities = [
             SearchUserHistory::class,
+            Friends::class
 
         ]
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun searchUserHistoryDao(): SearchUserHistoryDao
+    abstract fun friendsDao(): FriendsDao
     abstract fun loginDao(): LoginDao
 
     companion object {

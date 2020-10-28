@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.friends_default_item.view.*
 import woogie.space.messenger.R
 import woogie.space.messenger.model.Friends
+import woogie.space.messenger.model.SearchUserHistory
 
-class FriendsAdapter (var context: Context, var friendsList : ArrayList<Friends>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FriendsAdapter (var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var friendsList = emptyList<Friends>()
 
-    interface ItemClick { fun onClick(view: View, position: Int, chatModel: Friends, requestCode : Int) }
+    interface ItemClick { fun onClick(view: View, position: Int, friend: Friends, requestCode : Int) }
     var itemClick: ItemClick? = null
 
     companion object {
@@ -27,7 +29,7 @@ class FriendsAdapter (var context: Context, var friendsList : ArrayList<Friends>
 
         fun bind(friends: Friends, context: Context) {
 //            itemView.UserImage.text = friends.userName
-            itemView.UserName.text = friends.userName
+            itemView.UserName.text = friends.name
         }
     }
 
@@ -74,9 +76,7 @@ class FriendsAdapter (var context: Context, var friendsList : ArrayList<Friends>
         }
     }
 
-    override fun getItemCount(): Int {
-        return friendsList.size
-    }
+    override fun getItemCount() = friendsList.size
 
     override fun getItemViewType(position: Int): Int {
         return when (friendsList[position].viewType) {
@@ -84,5 +84,10 @@ class FriendsAdapter (var context: Context, var friendsList : ArrayList<Friends>
             TYPE_LOADING -> TYPE_LOADING
             else -> TYPE_LOADING
         }
+    }
+
+    internal fun setList(friendsList: List<Friends>) {
+        this.friendsList = friendsList
+        notifyDataSetChanged()
     }
 }
